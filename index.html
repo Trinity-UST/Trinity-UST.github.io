@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description"
+        content="Trinity benchmark evaluates an embodied agent’s perception, reasoning, and plan generation across diverse user profiles.">
+  <meta name="keywords" content="Human-Centered AI, Embodied Task Planning">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trinity: Human–Agent–Environment Alignment for Embodied Task Planning</title>
+
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-PYVRSFMDRL"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+
+    gtag('js', new Date());
+
+    gtag('config', 'G-PYVRSFMDRL');
+  </script>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
+        rel="stylesheet">
+
+  <link rel="stylesheet" href="./static/css/bulma.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-carousel.min.css">
+  <link rel="stylesheet" href="./static/css/bulma-slider.min.css">
+  <link rel="stylesheet" href="./static/css/fontawesome.all.min.css">
+  <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+  <link rel="stylesheet" href="./static/css/index.css">
+  <link rel="icon" href="./static/images/favicon.ico">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script defer src="./static/js/fontawesome.all.min.js"></script>
+  <script src="./static/js/bulma-carousel.min.js"></script>
+  <script src="./static/js/bulma-slider.min.js"></script>
+  <script src="./static/js/index.js"></script>
+</head>
+<body>
+
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+          <h1 class="title is-1 publication-title">
+            <img src="./static/images/icon.png" alt="icon" style="height: 1em; vertical-align: -0.15em;">
+            Trinity: Human–Agent–Environment Alignment for Embodied Task Planning
+          </h1>
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">
+              <a href="https://github.com/khm159">Hyungmin Kim</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://scholar.google.com/citations?hl=en&user=FpGgNtIAAAAJ">HoBeom Jeon</a><sup>1</sup>,</span>
+            <span class="author-block">
+              <a href="https://www.etri.re.kr/eng/main/main.etri">Dohyung Kim</a><sup>1,2,†</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://sites.google.com/view/jinhyeokjang">Jinhyeok Jang</a><sup>2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://zebehn.github.io/">Minsu Jang</a><sup>1,2</sup>,
+            </span>
+            <span class="author-block">
+              <a href="https://scholar.google.si/citations?user=PfnxK1kAAAAJ&hl=en">Jaehong Kim</a><sup>2</sup>,
+            </span>
+          </div>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block"><sup>1</sup>University of Science and Technology, </span>
+            <span class="author-block"><sup>2</sup>Electronics and Telecommunications Research Institute</span>
+          </div>
+
+          <div class="column has-text-centered">
+            <div class="publication-links">
+              <!-- PDF Link. -->
+              <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fas fa-file-pdf"></i>
+                  </span>
+                  <span>Paper</span>
+                </a>
+              </span>
+              <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="ai ai-arxiv"></i>
+                  </span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+              <!-- Video Link. -->
+              <!-- <span class="link-block">
+                <a 
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-youtube"></i>
+                  </span>
+                  <span>Video</span>
+                </a>
+              </span> -->
+              <!-- Code Link. -->
+              <span class="link-block">
+                <a href="https://github.com/trinity-ust/Trinity"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="fab fa-github"></i>
+                  </span>
+                  <span>Code</span>
+                  </a>
+              </span>
+              <!-- Dataset Link. -->
+              <span class="link-block">
+                <a href="https://github.com/trinity-ust/Trinity/releases/tag/v1.0.0"
+                   class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon">
+                      <i class="far fa-images"></i>
+                  </span>
+                  <span>Data</span>
+                  </a>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- <section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body">
+      <video id="teaser" autoplay muted loop playsinline height="100%">
+        <source src="./static/videos/teaser.mp4"
+                type="video/mp4">
+      </video>
+      <h2 class="subtitle has-text-centered">
+        <span class="dnerf">Nerfies</span> turns selfie videos from your phone into
+        free-viewpoint
+        portraits.
+      </h2>
+    </div>
+  </div>
+</section> -->
+
+<section class="hero teaser">
+  <div class="container is-max-desktop">
+    <div class="hero-body has-text-centered">
+      <img src="./static/images/figure1.png" alt="Teaser Image" style="max-width: 100%; height: auto;" />      
+      <h2 class="subtitle has-text-centered">
+        Overview of the Trinity benchmark and an example trajectory.
+      </h2>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <!-- Abstract. -->
+    <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            As household robots advance from simple household helpers to true companions, they must understand and accommodate the diverse spectrum of human differences to earn both technical trustworthiness and social acceptance. However, most embodied task-planning systems still ground their reasoning purely in the physical environment, overlooking the diversity of the people they serve. We frame this problem as Planning with Human Attributes (PHA), in which an agent must consider explicit user information into long-horizon household plans. To evaluate the PHA capabilities of an agent, we present Trinity, a benchmark that evaluates the entire chain—perception, reasoning, and action—across diverse user profiles. Within Trinity, a single instruction can yield different, equally valid—or even opposing—outcomes depending on a user’s religion, allergies, dietary preferences, and other personal attributes. Our experiments show that off-the-shelf agents that use only environment-centric examples struggle with PHA tasks. We hope Trinity brings domestic robots a step closer to becoming trusted, socially attuned partners.
+          </p>
+        </div>
+      </div>
+    </div>
+    <!--/ Abstract. -->
+
+    <!-- Paper video. -->
+    <!-- <div class="columns is-centered has-text-centered">
+      <div class="column is-four-fifths">
+        <h2 class="title is-3">Video</h2>
+        <div class="publication-video">
+          <iframe></iframe>
+        </div>
+      </div>
+    </div> -->
+    <!--/ Paper video. -->
+  </div>
+</section>
+
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Human-Agent-Environment Alignment</h2>
+        <div class="content has-text-justified">
+          <img src="./static/images/figure2.png" style="max-width: 100%; height: auto;" />    
+          Overview of the Trinity Environment and Dataset. (Left) The Trinity benchmark is
+          composed of realistic, multi-room houses, with environments containing up to 10 rooms. (Middle)
+          Within the Trinity benchmark, agents are equipped with 7 high-level actions to support task planning.
+          Additionally, there are 151 unique combinations of human attributes that the agent must take into
+          account during task execution. (Right) A total of 95 new objects have been curated specifically as
+          human attribute-aware items, enriching the agent’s decision-making context.  
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column">
+        <div class="content">
+          <h2 class="title is-3">AE Dataset</h2>
+          <p>
+            The AE (Agent-Environment) dataset is constructed as a cross-checking benchmark that closely follows previous embodied task planning datasets. It also functions as a baseline environment that simulates the deployment contexts of current embodied agents. These agents typically overlook the complexity and diversity of human attributes when addressing long-horizon household tasks. To tackle this limitation, the AE dataset adopts the same scene layouts (ProcTHOR-10k) and action interfaces, allowing for a direct assessment of an agent’s adaptability on the HAE dataset, using only training examples from AE. This setup facilitates evaluation of how well current agents generalize to a diverse range of service targets based solely on examples from existing benchmarks.
+          </p>
+        </div>
+      </div>
+
+      <div class="column">
+        <h2 class="title is-3">HAE Dataset</h2>
+        <div class="columns is-centered">
+          <div class="column content">
+            <p>
+              The HAE (Human-Agent-Environment Alignment) dataset is designed to support agents in reasoning about diverse and complex human attributes of the service target while performing long-horizon household tasks. The dataset includes three core tasks—preparing food, preparing a drink, and preparing both food and drink—as well as an additional task focused on preparing a hobby-related item. In each scenario, the agent is required to consider the user's human attributes when selecting and preparing the appropriate objects. Similar to AE dataset, HAE dataset is also checked by the heuristic task solver to guarentee the solvability.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">The Trinity Environment</h2>
+        <div class="content has-text-justified">
+          <p>
+            We introduce the brand new environment named Trinity.
+            We introduce the brand new environment named Trinity.
+            The Trinity is based on the 
+            <a href="https://github.com/allenai/procthor/blob/main/README.md" target="_blank">PROC-THOR-10k</a> 
+            dataset and up-to-date 
+            <a href="https://github.com/allenai/ai2thor" target="_blank">AI2THOR-5.0.0 APIs</a>.
+            We provide the various low-level controller APIs for the high-level embodied task planning.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h3 class="title is-4">Supported Agent</h3>
+        <div class="content has-text-justified">
+          <ul>
+            <li><a href="https://openreview.net/forum?id=WE_vluYUL-X" target="_blank">ACT agent (ICLR'23)</a></li>
+            <li><a href="https://openreview.net/forum?id=WE_vluYUL-X" target="_blank">ReAct agent (ICLR'23)</a></li>
+            <li><a href="https://openreview.net/forum?id=WE_vluYUL-X" target="_blank">ReAct-IM agent (ICLR'23)</a></li>
+            <li><a href="https://arxiv.org/abs/2410.02810" target="_blank">StateAct agent (REALM @ ACL 2025, under review)</a></li>
+            <li><a href="https://aclanthology.org/2025.coling-main.1/" target="_blank">PreAct agent (CoLing'25)</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="title is-4">Low-level Actions</h3>
+    <section class="hero is-light is-small">
+      <div class="hero-body">
+        <div class="container">
+          <div class="action-carousel-wrapper">
+            <div class="action-nav action-prev"><span>&#10094;</span></div>
+            <div class="action-nav action-next"><span>&#10095;</span></div>
+    
+            <div id="action-carousel" class="action-carousel">
+              <div class="action-item">
+                <div class="action-title">1. Room Navigation</div>
+                <img class="action-image" src="./static/actions/room_to_room_nav.gif" alt="Room Navigation">
+              </div>
+              <div class="action-item">
+                <div class="action-title">2. Go to Object</div>
+                <img class="action-image" src="./static/actions/goto_obj.gif" alt="Go to Object">
+              </div>
+              <div class="action-item">
+                <div class="action-title">3. Pickup</div>
+                <img class="action-image" src="./static/actions/pickup.gif" alt="Pickup">
+              </div>
+              <div class="action-item">
+                <div class="action-title">4. Put Down</div>
+                <img class="action-image" src="./static/actions/put_down.gif" alt="Put Down">
+              </div>
+              <div class="action-item">
+                <div class="action-title">5. Slice</div>
+                <img class="action-image" src="./static/actions/slice.gif" alt="Slice">
+              </div>
+              <div class="action-item">
+                <div class="action-title">6. Turn On</div>
+                <img class="action-image" src="./static/actions/turn_on.gif" alt="Turn On">
+              </div>
+              <div class="action-item">
+                <div class="action-title">7. Turn Off</div>
+                <img class="action-image" src="./static/actions/turn_off.gif" alt="Turn Off">
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  </div>
+</section>
+
+<!-- Holodeck Generated Scene Support Section -->
+<section class="section">
+  <div class="container is-max-desktop">
+    <div class="columns is-centered">
+      <div class="column is-full-width">
+        <h2 class="title is-3">Holodeck Generated Scene Support</h2>
+
+        <div class="content has-text-justified">
+          <p>
+            Our Trinity environment supports unlimited scene extensions powered by the amazing work named 
+            <a href="https://github.com/allenai/Holodeck" target="_blank">HOLODeck (CVPR'24)</a>. Many thanks to the authors!
+          </p>
+
+          <p>
+            We integrate the HOLODeck capability into our high-level planning environment to support more flexible high-level embodied task planning scenarios.
+          </p>
+
+          <p>
+            Below, we show a guide on how we integrate the generated scenes using HOLODeck into our environment.
+          </p>
+        </div>
+        <h3 class="title is-4">Holodeck Generated Library Example</h3>
+        <div class="content">
+
+          <h4 class="title is-5">Generation Prompt</h4>
+          <div class="box" style="
+              background-color: #f9f9f9;
+              border-left: 4px solid #00b894;
+              padding: 1.2em 1.5em;
+              margin-top: 1.2rem;
+              margin-bottom: 2rem;
+              box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+          ">
+            <p>
+              "The library is a quiet, organized space lined with tall shelves filled with books. It features reading areas with desks and chairs, soft lighting, and a calm atmosphere, with some seats near windows for natural light."
+            </p>
+          </div>
+          <figure class="image">
+            <img src="./static/holodeck/An_Library.png" alt="Library Scene" style="width: 100%; height: auto; object-fit: contain;" />
+          </figure>
+          
+        <!-- Holodeck Interaction Example -->
+        <h3 class="title is-5">Holodeck Interaction Example</h3>
+        <div class="content has-text-justified">
+          <p>
+            The following interaction visualizes how the environment dynamically transitions in response to a high-level instruction.
+            Use the slider below to explore the intermediate scene states.
+          </p>
+        </div>
+
+        <div class="box" style="
+        background-color: #f9f9f9;
+        border-left: 4px solid #00b894;
+        padding: 1.2em 1.5em;
+        margin-top: 1.2rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+        ">
+          <p>
+            "Please serve a coffee to the reading table."
+          </p>
+        </div>
+
+        <div class="columns is-vcentered interpolation-panel">
+          <div class="column interpolation-video-column">
+            <div id="interpolation-image-wrapper">
+              <img src="./static/interpolation/stacked/000001.jpg"
+                  class="interpolation-image"
+                  alt="Initial Holodeck Frame" />
+            </div>
+            <input class="slider is-fullwidth is-large is-info"
+                  id="interpolation-slider"
+                  step="1" min="1" max="9" value="1" type="range">
+          </div>
+        </div>
+        <br/>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title">BibTeX</h2>
+    <pre><code>@article{kim2025trinity,
+      title   = {Trinity: Human--Agent-Environment Alignment for Embodied Task Planning},
+      author  = {Kim, Hyungmin and Jeon, HoBeom and Kim, Dohyung and Jang, Jinhyeok and Jang, Minsu and Kim, Jaehong},
+      journal = {arXiv preprint arXiv:2505.00000},
+      year    = {2025}
+    }
+}</code></pre>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <a class="icon-link"
+         href="./static/videos/nerfies_paper.pdf">
+        <i class="fas fa-file-pdf"></i>
+      </a>
+      <a class="icon-link" href="https://github.com/keunhong" class="external-link" disabled>
+        <i class="fab fa-github"></i>
+      </a>
+    </div>
+    <div class="columns is-centered">
+      <div class="column is-8">
+        <div class="content">
+          <p>
+            This website is adapted from 
+            <a href="https://github.com/nerfies/nerfies.github.io" target="_blank">Nerfies</a>, 
+            licensed under a 
+            <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">
+              Creative Commons Attribution-ShareAlike 4.0 International License
+            </a>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
