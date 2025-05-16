@@ -52,20 +52,7 @@ function initBulmaCarousel() {
     autoplaySpeed: 3000,
   };
 
-  const carousels = bulmaCarousel.attach('.carousel', options);
-
-  carousels.forEach(c => {
-    c.on('before:show', state => {
-      console.debug('carousel before:show', state);
-    });
-  });
-
-  const myEl = document.querySelector('#my-element');
-  if (myEl?.bulmaCarousel) {
-    myEl.bulmaCarousel.on('before-show', state => {
-      console.debug('single carousel before-show', state);
-    });
-  }
+  bulmaCarousel.attach('.carousel', options);
 }
 
 /* --------------------------------------------------
@@ -93,30 +80,71 @@ function initActionCarousel() {
   const items = [...track.querySelectorAll('.action-item')];
   if (!items.length) return;
 
-  const GAP = 40;
-  const itemWidth = items[0].offsetWidth;
+  /* --------------------------------------------------
+   * layout helpers
+   * -------------------------------------------------- */
+  const GAP       = 40;
+  const itemWidth = () => items[0].offsetWidth;
+  const step      = () => itemWidth() + GAP;
 
   const pad = () => {
-    const side = (track.parentElement.clientWidth - itemWidth) / 2;
-    track.style.paddingLeft = `${side}px`;
+    const side = (track.parentElement.clientWidth - itemWidth()) / 2;
+    track.style.paddingLeft  = `${side}px`;
     track.style.paddingRight = `${side}px`;
   };
   pad();
   window.addEventListener('resize', pad);
 
-  const step = () => itemWidth + GAP;
+  /* --------------------------------------------------
+   * dot indicator
+   * -------------------------------------------------- */
+  const dotsBox = document.getElementById('action-dots');
+  const dots = [];
+
+  if (dotsBox) {
+    items.forEach((_, i) => {
+      const dot = document.createElement('span');
+      dot.className = 'action-dot' + (i === 0 ? ' is-active' : '');
+      dot.addEventListener('click', () => scrollToIdx(i));
+      dotsBox.appendChild(dot);
+      dots.push(dot);
+    });
+  }
+
+  /* --------------------------------------------------
+   * scroll helpers
+   * -------------------------------------------------- */
   let idx = 0;
 
-  const scrollToIdx = (i, behavior = 'smooth') => {
-    idx = (i + items.length) % items.length;
-    track.scrollTo({ left: idx * step(), behavior });
+  const activateDot = (i) => {
+    if (!dots.length) return;
+    dots[idx].classList.remove('is-active');
+    dots[i].classList.add('is-active');
   };
 
-  document.querySelectorAll('.action-prev').forEach(b =>
-    b.addEventListener('click', () => scrollToIdx(idx - 1))
+  const scrollToIdx = (i, behavior = 'smooth') => {
+    const next = (i + items.length) % items.length;
+    activateDot(next);
+    idx = next;
+    track.scrollTo({ left: next * step(), behavior });
+  };
+
+  track.addEventListener('scroll', () => {
+    const current = Math.round(track.scrollLeft / step());
+    if (current !== idx) {
+      activateDot(current);
+      idx = current;
+    }
+  });
+
+  /* --------------------------------------------------
+   * nav buttons
+   * -------------------------------------------------- */
+  document.querySelectorAll('.action-prev').forEach(btn =>
+    btn.addEventListener('click', () => scrollToIdx(idx - 1))
   );
-  document.querySelectorAll('.action-next').forEach(b =>
-    b.addEventListener('click', () => scrollToIdx(idx + 1))
+  document.querySelectorAll('.action-next').forEach(btn =>
+    btn.addEventListener('click', () => scrollToIdx(idx + 1))
   );
 
   scrollToIdx(0, 'auto');
@@ -128,11 +156,8 @@ function initActionCarousel() {
 $(document).ready(() => {
   initNavbarBurger();
   initBulmaCarousel();
-
   preloadInterpolationImages();
   initInterpolationSlider();
-
   initActionCarousel();
-
   bulmaSlider.attach();
 });

@@ -234,3 +234,36 @@ body {
   font-size: 24px;
   line-height: 1;
 }
+
+@media (max-width: 700px) {
+  .action-carousel {
+    touch-action: pan-x;   /* 가로 스와이프만 허용 */
+    overscroll-behavior-x: contain; /* 부모로 튕김 방지(사파리) */
+  }
+
+  .action-item {
+    width: 100%;
+  }
+  .action-nav {
+    opacity: 0;            /* 보이지 않음 */
+    pointer-events: none;  /* 클릭도 차단 */
+  }
+}
+.action-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  margin-top: 12px;
+}
+
+.action-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #c4c4c4;      /* inactive: gray */
+  transition: background 0.2s;
+}
+
+.action-dot.is-active {
+  background: #49a6ff;      /* active: sky-blue */
+}
